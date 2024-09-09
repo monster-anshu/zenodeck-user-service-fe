@@ -1,6 +1,8 @@
 import { vitePlugin as remix } from "@remix-run/dev";
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+
+const env = loadEnv("", process.cwd(), "");
 
 export default defineConfig({
   plugins: [
@@ -13,4 +15,12 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  server: {
+    proxy: {
+      "/api/v1": {
+        target: env.VITE_API_URL,
+        changeOrigin: true,
+      },
+    },
+  },
 });
