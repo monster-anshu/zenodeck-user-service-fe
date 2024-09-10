@@ -1,17 +1,17 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { AuthApi } from "~/api/auth";
-import { cn } from "~/lib/utils";
-import { Button } from "~/shadcn/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { AuthApi } from '~/api/auth';
+import { cn } from '~/lib/utils';
+import { Button } from '~/shadcn/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "~/shadcn/ui/card";
+} from '~/shadcn/ui/card';
 import {
   Form,
   FormControl,
@@ -19,29 +19,29 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/shadcn/ui/form";
-import { Input } from "~/shadcn/ui/input";
+} from '~/shadcn/ui/form';
+import { Input } from '~/shadcn/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "~/shadcn/ui/select";
-import { FormElement } from "~/types";
+} from '~/shadcn/ui/select';
+import { FormElement } from '~/types';
 
-const PRODUCT_IDS = ["BOOKINGS", "PROJECTS"] as const;
+const PRODUCT_IDS = ['BOOKINGS', 'PROJECTS'] as const;
 
 const schema = z.object({
-  countryCode: z.string().nonempty("Country code is required"),
+  countryCode: z.string().nonempty('Country code is required'),
   emailId: z.string().email({
-    message: "Invalid email",
+    message: 'Invalid email',
   }),
-  firstName: z.string().nonempty("Firstname is required"),
-  lastName: z.string().nonempty("Lastname is required"),
-  mobileNo: z.string().nonempty("Phone no is required"),
+  firstName: z.string().nonempty('Firstname is required'),
+  lastName: z.string().nonempty('Lastname is required'),
+  mobileNo: z.string().nonempty('Phone no is required'),
   password: z.string().min(8, {
-    message: "Password must be 8 charachter long",
+    message: 'Password must be 8 charachter long',
   }),
   productId: z.enum(PRODUCT_IDS).optional(),
   companyName: z.string().optional(),
@@ -51,7 +51,7 @@ const RegisterPage = () => {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      emailId: "",
+      emailId: '',
     },
   });
 
@@ -64,23 +64,23 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex p-4 items-center">
-      <Card className={cn("w-[500px] mx-auto ")}>
+    <div className='flex min-h-screen items-center p-4'>
+      <Card className={cn('mx-auto w-[500px]')}>
         <CardHeader>
           <CardTitle>Register</CardTitle>
           <CardDescription>Create a new accout</CardDescription>
         </CardHeader>
-        <CardContent className="grid gap-4">
+        <CardContent className='grid gap-4'>
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="grid grid-cols-2 gap-3"
+              className='grid grid-cols-2 gap-3'
             >
               {formElements.map((item) => {
                 if (
-                  item.type === "email" ||
-                  item.type === "password" ||
-                  item.type === "text"
+                  item.type === 'email' ||
+                  item.type === 'password' ||
+                  item.type === 'text'
                 ) {
                   return (
                     <FormField
@@ -88,7 +88,7 @@ const RegisterPage = () => {
                       control={form.control}
                       name={item.name}
                       render={({ field }) => (
-                        <FormItem className={cn("col-span-2", item.className)}>
+                        <FormItem className={cn('col-span-2', item.className)}>
                           <FormLabel>{item.label}</FormLabel>
                           <FormControl>
                             <Input
@@ -104,14 +104,14 @@ const RegisterPage = () => {
                   );
                 }
 
-                if (item.type === "select") {
+                if (item.type === 'select') {
                   return (
                     <FormField
                       control={form.control}
                       name={item.name}
                       key={item.name}
                       render={({ field }) => (
-                        <FormItem className={cn("col-span-2", item.className)}>
+                        <FormItem className={cn('col-span-2', item.className)}>
                           <FormLabel>{item.label}</FormLabel>
                           <Select
                             onValueChange={field.onChange}
@@ -145,8 +145,8 @@ const RegisterPage = () => {
               })}
 
               <Button
-                type="submit"
-                className="col-span-2"
+                type='submit'
+                className='col-span-2'
                 loading={register.isPending}
               >
                 Register
@@ -161,69 +161,69 @@ const RegisterPage = () => {
 
 const formElements = [
   {
-    name: "firstName",
-    label: "Firstname",
-    placeholder: "Jone",
-    type: "text",
-    className: "col-span-1",
+    name: 'firstName',
+    label: 'Firstname',
+    placeholder: 'Jone',
+    type: 'text',
+    className: 'col-span-1',
   },
   {
-    name: "lastName",
-    label: "Lastname",
-    placeholder: "Doe",
-    type: "text",
-    className: "col-span-1",
+    name: 'lastName',
+    label: 'Lastname',
+    placeholder: 'Doe',
+    type: 'text',
+    className: 'col-span-1',
   },
   {
-    name: "emailId",
-    label: "Email",
-    placeholder: "user@example.com",
-    type: "email",
+    name: 'emailId',
+    label: 'Email',
+    placeholder: 'user@example.com',
+    type: 'email',
   },
   {
-    name: "companyName",
-    label: "Company name",
-    placeholder: "Facebook",
-    type: "text",
+    name: 'companyName',
+    label: 'Company name',
+    placeholder: 'Facebook',
+    type: 'text',
   },
   {
-    name: "productId",
-    label: "Product Id",
-    type: "select",
+    name: 'productId',
+    label: 'Product Id',
+    type: 'select',
     options: [
       {
-        label: "Bookings",
-        value: "BOOKINGS",
+        label: 'Bookings',
+        value: 'BOOKINGS',
       },
       {
-        label: "Projects",
-        value: "PROJECTS",
+        label: 'Projects',
+        value: 'PROJECTS',
       },
     ],
   },
   {
-    name: "mobileNo",
-    type: "text",
-    label: "Phone number",
-    placeholder: "6235237273823",
+    name: 'mobileNo',
+    type: 'text',
+    label: 'Phone number',
+    placeholder: '6235237273823',
   },
   {
-    name: "countryCode",
-    type: "select",
-    label: "Country",
-    placeholder: "Country",
+    name: 'countryCode',
+    type: 'select',
+    label: 'Country',
+    placeholder: 'Country',
     options: [
       {
-        label: "India",
-        value: "IN",
+        label: 'India',
+        value: 'IN',
       },
     ],
   },
   {
-    name: "password",
-    type: "password",
-    label: "Password",
-    placeholder: "********",
+    name: 'password',
+    type: 'password',
+    label: 'Password',
+    placeholder: '********',
   },
 ] satisfies FormElement<typeof schema>[];
 

@@ -1,16 +1,16 @@
-import { ApiResponse, client } from "./client";
+import { ApiResponse, client } from './client';
 
 export class AuthApi {
   static async register(body: RegisterBody) {
     const { data } = await client.post<RegisterResponse>(
-      "/user/auth/register",
+      '/user/auth/register',
       body
     );
     return data;
   }
 
   static async login(body: LoginBody) {
-    const { data } = await client.post<LoginResponse>("/user/auth/login", body);
+    const { data } = await client.post<LoginResponse>('/user/auth/login', body);
     return data;
   }
 }

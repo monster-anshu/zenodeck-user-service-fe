@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { z, ZodSchema } from "zod";
+import { ReactNode } from 'react';
+import { z, ZodSchema } from 'zod';
 
 type Option = {
   label: ReactNode;
@@ -13,6 +13,6 @@ export type FormElement<T extends ZodSchema> = {
   disabled?: boolean;
   className?: string;
 } & (
-  | { type: "text" | "email" | "password" }
-  | { type: "select"; options: Option[] }
+  | { type: 'text' | 'email' | 'password' }
+  | { type: 'select'; options: Option[] }
 );

@@ -1,17 +1,17 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { AuthApi } from "~/api/auth";
-import { cn } from "~/lib/utils";
-import { Button } from "~/shadcn/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { AuthApi } from '~/api/auth';
+import { cn } from '~/lib/utils';
+import { Button } from '~/shadcn/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "~/shadcn/ui/card";
+} from '~/shadcn/ui/card';
 import {
   Form,
   FormControl,
@@ -19,26 +19,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/shadcn/ui/form";
-import { Input } from "~/shadcn/ui/input";
+} from '~/shadcn/ui/form';
+import { Input } from '~/shadcn/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "~/shadcn/ui/select";
-import { FormElement } from "~/types";
+} from '~/shadcn/ui/select';
+import { FormElement } from '~/types';
 
-const PRODUCT_IDS = ["BOOKINGS", "PROJECTS"] as const;
+const PRODUCT_IDS = ['BOOKINGS', 'PROJECTS'] as const;
 
 const schema = z.object({
   emailId: z.string().email({
-    message: "Invalid email",
+    message: 'Invalid email',
   }),
   productId: z.enum(PRODUCT_IDS).optional(),
   password: z.string().min(8, {
-    message: "Password must be 8 charachter long",
+    message: 'Password must be 8 charachter long',
   }),
 });
 
@@ -46,7 +46,7 @@ const LoginPage = () => {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      emailId: "",
+      emailId: '',
     },
   });
 
@@ -59,23 +59,23 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex p-4 items-center">
-      <Card className={cn("w-[500px] mx-auto ")}>
+    <div className='flex min-h-screen items-center p-4'>
+      <Card className={cn('mx-auto w-[500px]')}>
         <CardHeader>
           <CardTitle>Login</CardTitle>
           <CardDescription>Sign-in with your account</CardDescription>
         </CardHeader>
-        <CardContent className="grid gap-4">
+        <CardContent className='grid gap-4'>
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="grid grid-cols-2 gap-3"
+              className='grid grid-cols-2 gap-3'
             >
               {formElements.map((item) => {
                 if (
-                  item.type === "email" ||
-                  item.type === "password" ||
-                  item.type === "text"
+                  item.type === 'email' ||
+                  item.type === 'password' ||
+                  item.type === 'text'
                 ) {
                   return (
                     <FormField
@@ -83,7 +83,7 @@ const LoginPage = () => {
                       control={form.control}
                       name={item.name}
                       render={({ field }) => (
-                        <FormItem className={cn("col-span-2", item.className)}>
+                        <FormItem className={cn('col-span-2', item.className)}>
                           <FormLabel>{item.label}</FormLabel>
                           <FormControl>
                             <Input
@@ -99,14 +99,14 @@ const LoginPage = () => {
                   );
                 }
 
-                if (item.type === "select") {
+                if (item.type === 'select') {
                   return (
                     <FormField
                       control={form.control}
                       name={item.name}
                       key={item.name}
                       render={({ field }) => (
-                        <FormItem className={cn("col-span-2", item.className)}>
+                        <FormItem className={cn('col-span-2', item.className)}>
                           <FormLabel>{item.label}</FormLabel>
                           <Select
                             onValueChange={field.onChange}
@@ -140,8 +140,8 @@ const LoginPage = () => {
               })}
 
               <Button
-                type="submit"
-                className="col-span-2"
+                type='submit'
+                className='col-span-2'
                 loading={login.isPending}
               >
                 Signin
@@ -156,29 +156,29 @@ const LoginPage = () => {
 
 const formElements: FormElement<typeof schema>[] = [
   {
-    name: "emailId",
-    label: "Email",
-    placeholder: "user@example.com",
-    type: "email",
+    name: 'emailId',
+    label: 'Email',
+    placeholder: 'user@example.com',
+    type: 'email',
   },
   {
-    name: "password",
-    type: "password",
-    label: "Password",
-    placeholder: "********",
+    name: 'password',
+    type: 'password',
+    label: 'Password',
+    placeholder: '********',
   },
   {
-    name: "productId",
-    label: "Product Id",
-    type: "select",
+    name: 'productId',
+    label: 'Product Id',
+    type: 'select',
     options: [
       {
-        label: "Bookings",
-        value: "BOOKINGS",
+        label: 'Bookings',
+        value: 'BOOKINGS',
       },
       {
-        label: "Projects",
-        value: "PROJECTS",
+        label: 'Projects',
+        value: 'PROJECTS',
       },
     ],
   },
