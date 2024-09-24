@@ -7,7 +7,7 @@ export class UserApi {
   }
 
   static async update(body: Pick<User, 'firstName' | 'lastName'>) {
-    const { data } = await client.put<ApiResponse>('/user/update', body);
+    const { data } = await client.patch<UpdateReponse>('/user/update', body);
     return data;
   }
 }
@@ -15,6 +15,10 @@ export class UserApi {
 export interface InfoResponse {
   user: User;
 }
+
+type UpdateReponse = ApiResponse & {
+  user: User;
+};
 
 export interface User {
   _id: string;

@@ -34,7 +34,7 @@ const UserSidebar: FC<IUserSidebarProps> = () => {
       label: 'Logout',
       onClick: async () => {
         await AuthApi.logout();
-        navigate('/');
+        navigate('/login');
       },
     },
   ];

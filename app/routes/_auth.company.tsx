@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
+import { PiSpinnerGapLight } from 'react-icons/pi';
 import { UserCompany } from '~/api/company.api';
 import CompanyDialog from '~/components/CompanyDialog';
 import ProfilePic from '~/components/ProfilePic';
@@ -9,10 +10,14 @@ import { Button } from '~/shadcn/ui/button';
 type ICompanyProps = {};
 
 const Company: FC<ICompanyProps> = () => {
-  const { data } = useQuery(companyListOptions);
+  const { data, isLoading } = useQuery(companyListOptions);
   const [selectedCompany, setSelectedCompany] = useState(
     null as null | UserCompany
   );
+
+  if (isLoading) {
+    return <PiSpinnerGapLight className='mx-auto my-5 animate-spin text-3xl' />;
+  }
 
   return (
     <div className='p-8'>
@@ -24,7 +29,7 @@ const Company: FC<ICompanyProps> = () => {
       ) : null}
       <h2 className='text-2xl font-medium'>Company Settings</h2>
       <p className='text-black/50'>Manage Company Name,Products, Logos</p>
-      <div className='py-4'>
+      <div className='py-6'>
         {data?.map((company) => {
           return (
             <div key={company._id} className='flex rounded-lg border-2'>

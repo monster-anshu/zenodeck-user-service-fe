@@ -4,10 +4,9 @@ import { UserApi } from '~/api/user.api';
 
 export const userOptions = queryOptions({
   queryKey: ['user-info'],
-  refetchOnMount: false,
   queryFn: async () => {
     const res = await UserApi.info();
-    return res;
+    return res.user;
   },
 });
 

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { MetaFunction } from '@remix-run/node';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { UserApi } from '~/api/user.api';
@@ -29,7 +29,8 @@ const schema = z.object({
 
 export default function UserPage() {
   const userQuery = useQuery(userOptions);
-  const user = userQuery.data?.user;
+  const queryClient = useQueryClient();
+  const user = userQuery.data;
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -43,6 +44,15 @@ export default function UserPage() {
     mutationFn: async (values: z.infer<typeof schema>) => {
       const res = await UserApi.update(values);
       return res;
+    },
+    onSuccess: async (data) => {
+      queryClient.setQueryData(userOptions.queryKey, (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          ...data.user,
+        };
+      });
     },
   });
 
@@ -61,7 +71,7 @@ export default function UserPage() {
           </ProfilePic>
         </div>
       </div>
-      Hi ,{userQuery.data?.user.firstName}
+      Hi ,{user?.firstName}
       <div className='mt-10'>
         <h2 className='text-2xl font-medium'>Basic Info</h2>
         <div>

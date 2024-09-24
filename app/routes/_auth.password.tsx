@@ -28,7 +28,7 @@ const schema = z.object({
 });
 
 const PasswordPage: FC<IPasswordPageProps> = () => {
-  const { data: userInfo } = useQuery(userOptions);
+  const { data: user } = useQuery(userOptions);
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -64,9 +64,7 @@ const PasswordPage: FC<IPasswordPageProps> = () => {
 
   return (
     <div className='p-8'>
-      {values.openOtpDialog ? (
-        <OtpDialog emailId={userInfo?.user.emailId} />
-      ) : null}
+      {values.openOtpDialog ? <OtpDialog emailId={user?.emailId} /> : null}
       <div>
         <h2 className='text-2xl font-medium'>Change Password</h2>
         <p className='text-black/50'>Change or Update password</p>
