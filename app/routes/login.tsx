@@ -1,8 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Link, useNavigate } from '@remix-run/react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { AuthApi } from '~/api/auth';
+import { AuthApi } from '~/api/auth.api';
 import { cn } from '~/lib/utils';
 import { Button } from '~/shadcn/ui/button';
 import {
@@ -43,6 +44,8 @@ const schema = z.object({
 });
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -52,6 +55,9 @@ const LoginPage = () => {
 
   const login = useMutation({
     mutationFn: AuthApi.login,
+    onSuccess() {
+      navigate('/user');
+    },
   });
 
   function onSubmit(values: z.infer<typeof schema>) {
@@ -147,6 +153,22 @@ const LoginPage = () => {
                 Signin
               </Button>
             </form>
+            <div className='text-center text-sm'>
+              <p>
+                <Link
+                  className='text-primary underline'
+                  to={'/forgot-password'}
+                >
+                  Forgot password ?
+                </Link>
+              </p>
+              <p>
+                <span>{"Don't have an account ? "}</span>
+                <Link className='text-primary underline' to={'/register'}>
+                  Register
+                </Link>
+              </p>
+            </div>
           </Form>
         </CardContent>
       </Card>

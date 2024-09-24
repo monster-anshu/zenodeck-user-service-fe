@@ -11,6 +11,7 @@ const queryClient = new QueryClient({
     queries: {
       refetchOnWindowFocus: false,
       retry: false,
+      retryOnMount: false,
     },
   },
 });

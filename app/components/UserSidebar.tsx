@@ -1,43 +1,55 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { CiUser } from 'react-icons/ci';
-import { BsKey } from 'react-icons/bs';
+import { BsKey, BsPower } from 'react-icons/bs';
 import { SiAwsorganizations } from 'react-icons/si';
-import { Link, useLocation } from '@remix-run/react';
+import { Link, useLocation, useNavigate } from '@remix-run/react';
 import { cn } from '~/lib/utils';
+import { AuthApi } from '~/api/auth.api';
 
 type IUserSidebarProps = {};
 
-const options = [
-  {
-    link: '/',
-    icon: <CiUser />,
-    label: 'User',
-  },
-  {
-    link: '/password',
-    icon: <BsKey />,
-    label: 'User',
-  },
-  {
-    link: '/orgnaization',
-    icon: <SiAwsorganizations />,
-    label: 'Orgnaization',
-  },
-];
-
 const UserSidebar: FC<IUserSidebarProps> = () => {
   const location = useLocation();
-  console.log(location);
+  const navigate = useNavigate();
+
+  const options = [
+    {
+      link: '/user',
+      icon: <CiUser />,
+      label: 'User',
+    },
+    {
+      link: '/password',
+      icon: <BsKey />,
+      label: 'Password',
+    },
+    {
+      link: '/company',
+      icon: <SiAwsorganizations />,
+      label: 'Company',
+    },
+    {
+      link: '#',
+      icon: <BsPower />,
+      label: 'Logout',
+      onClick: async () => {
+        await AuthApi.logout();
+        navigate('/');
+      },
+    },
+  ];
+
   return (
-    <div className='w-72'>
+    <div className='w-72 border-r-2'>
       {options.map((option) => {
         const isActive = location.pathname === option.link;
         return (
           <Link
             to={option.link}
             key={option.link}
+            onClick={option.onClick}
             className={cn(
-              'flex items-center justify-start gap-2 border px-4 py-3 font-medium',
+              'flex items-center justify-start gap-2 border-b-2 px-4 py-3 font-medium',
               isActive ? 'text-primary' : ''
             )}
           >

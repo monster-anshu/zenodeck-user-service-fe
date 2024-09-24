@@ -7,6 +7,7 @@ import {
 } from '@remix-run/react';
 import './tailwind.css';
 import ReactQueryProvider from './providers/react-query';
+import { Toaster } from 'sonner';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -21,6 +22,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ReactQueryProvider>{children}</ReactQueryProvider>
         <ScrollRestoration />
         <Scripts />
+        <Toaster />
       </body>
     </html>
   );
