@@ -64,7 +64,7 @@ export default function UserPage() {
     <div className='p-8'>
       <div>
         <h2 className='text-2xl font-medium'>Profile Picture</h2>
-        <p className='text-black/50'>Upload your Profile picture</p>
+        <p className='text-foreground/50'>Upload your Profile picture</p>
         <div className='py-4'>
           <ProfilePic className='text-2xl' width={60} src={user?.profilePic}>
             {user?.firstName}

@@ -28,7 +28,7 @@ const Company: FC<ICompanyProps> = () => {
         />
       ) : null}
       <h2 className='text-2xl font-medium'>Company Settings</h2>
-      <p className='text-black/50'>Manage Company Name,Products, Logos</p>
+      <p className='text-foreground'>Manage Company Name,Products, Logos</p>
       <div className='py-6'>
         {data?.map((company) => {
           return (
@@ -40,7 +40,9 @@ const Company: FC<ICompanyProps> = () => {
               </div>
               <div className='flex-1 p-4'>
                 <p className='text-sm font-medium'>{company.companyName}</p>
-                <p className='mt-1 text-xs text-black/70'>Registered with</p>
+                <p className='mt-1 text-xs text-foreground/70'>
+                  Registered with
+                </p>
                 <p className='text-sm'>{company.allowedProductIds.join(' ')}</p>
               </div>
               <div className='p-3'>

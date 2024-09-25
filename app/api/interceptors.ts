@@ -1,6 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { ApiResponse } from './client';
-import { DOMAIN } from '~/env';
 
 export class ApiError extends Error {
   meta: Record<string, unknown>;
@@ -33,7 +32,7 @@ export const commonErrorAuthInterceptor = (error: AxiosError) => {
   }
 
   if (status === 401) {
-    window.location.href = DOMAIN + '/login';
+    window.location.href = '/login';
   }
 
   throw new Error(error.message);

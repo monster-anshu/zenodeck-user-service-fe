@@ -67,7 +67,7 @@ const PasswordPage: FC<IPasswordPageProps> = () => {
       {values.openOtpDialog ? <OtpDialog emailId={user?.emailId} /> : null}
       <div>
         <h2 className='text-2xl font-medium'>Change Password</h2>
-        <p className='text-black/50'>Change or Update password</p>
+        <p className='text-foreground/50'>Change or Update password</p>
         <div className='py-4'>
           <div>
             <Form {...form}>
