@@ -12,7 +12,7 @@ type ICompanyProps = {};
 const Company: FC<ICompanyProps> = () => {
   const { data, isLoading } = useQuery(companyListOptions);
   const [selectedCompany, setSelectedCompany] = useState(
-    null as null | UserCompany
+    null as null | UserCompany,
   );
 
   if (isLoading) {

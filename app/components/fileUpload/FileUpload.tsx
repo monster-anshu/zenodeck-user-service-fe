@@ -29,7 +29,7 @@ export interface IFileUploadProps {
   uploadFn?: (
     file: File,
     module?: string,
-    onProgress?: (progress: number) => void
+    onProgress?: (progress: number) => void,
   ) => Promise<IFile> | IFile;
   hideLoader?: boolean;
   onProgress?: (progress: number) => void;
@@ -57,7 +57,7 @@ const FileUpload = React.forwardRef<IFileUploadRef, IFileUploadProps>(
       disabled,
       onError,
     },
-    ref
+    ref,
   ) {
     const eventRef = useRef<{
       onFileUpload?: (file: IFile) => void;
@@ -123,7 +123,7 @@ const FileUpload = React.forwardRef<IFileUploadRef, IFileUploadProps>(
         ) {
           onError?.(true);
           toast.error(
-            `Image dimensions should not exceed ${fileInfo.width}x${fileInfo.height} pixels `
+            `Image dimensions should not exceed ${fileInfo.width}x${fileInfo.height} pixels `,
           );
           return;
         }
@@ -135,7 +135,7 @@ const FileUpload = React.forwardRef<IFileUploadRef, IFileUploadProps>(
     };
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (
-      event
+      event,
     ) => {
       const { target } = event;
       const file = target.files?.[0];
@@ -164,7 +164,7 @@ const FileUpload = React.forwardRef<IFileUploadRef, IFileUploadProps>(
             <div className='fixed bottom-0 left-0 right-0 top-0 z-[100] grid place-items-center bg-black/40'>
               <PiSpinnerGapLight className='mx-auto my-5 animate-spin text-3xl' />
             </div>,
-            document.body
+            document.body,
           )}
         <input
           disabled={disabled}
@@ -176,7 +176,7 @@ const FileUpload = React.forwardRef<IFileUploadRef, IFileUploadProps>(
         />
       </>
     );
-  }
+  },
 );
 
 export default FileUpload;

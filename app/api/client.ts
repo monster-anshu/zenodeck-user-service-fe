@@ -10,7 +10,7 @@ export const client = axios.create({
 
 client.interceptors.response.use(
   commonResponseInterceptor,
-  commonErrorAuthInterceptor
+  commonErrorAuthInterceptor,
 );
 
 export type ApiResponse = {

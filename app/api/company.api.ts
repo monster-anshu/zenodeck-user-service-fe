@@ -10,7 +10,7 @@ export class CompanyApi {
   static async update({ companyId, ...body }: UpdateCompanyBody) {
     const { data } = await client.patch<UpdateCompanyResponse>(
       `/user/company/${companyId}/update`,
-      body
+      body,
     );
     return data.companyInfo;
   }

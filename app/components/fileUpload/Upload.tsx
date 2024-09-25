@@ -42,7 +42,7 @@ const Upload: FC<IUploadProps> = ({
         'relative',
         clickable && 'cursor-pointer',
         className,
-        dragging && classNameOnDrag
+        dragging && classNameOnDrag,
       )}
       onDragOver={(e) => {
         e.preventDefault();

@@ -30,7 +30,7 @@ const ProfilePic: FC<IProfilePicProps> = ({
       {...props}
       className={twMerge(
         'text-20 grid place-items-center rounded-full bg-primary/10 font-medium text-primary/80',
-        className
+        className,
       )}
       style={{
         width: width,

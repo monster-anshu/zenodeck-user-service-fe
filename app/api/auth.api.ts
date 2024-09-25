@@ -4,7 +4,7 @@ export class AuthApi {
   static async register(body: RegisterBody) {
     const { data } = await client.post<RegisterResponse>(
       '/user/auth/register',
-      body
+      body,
     );
     return data;
   }
@@ -22,7 +22,7 @@ export class AuthApi {
   static async forgotPassword(body: ForgotPassword) {
     const { data } = await client.post<ApiResponse>(
       '/user/auth/forgot-password',
-      body
+      body,
     );
     return data;
   }
@@ -32,7 +32,7 @@ export class AuthApi {
       '/user/auth/change-password',
       {
         password,
-      }
+      },
     );
     return data;
   }

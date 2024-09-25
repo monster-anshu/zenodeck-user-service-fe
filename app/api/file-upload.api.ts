@@ -5,7 +5,7 @@ export default class FileUploadApi {
   static async upload(
     file: File,
     module?: string,
-    onProgress?: (progress: number) => void
+    onProgress?: (progress: number) => void,
   ): Promise<IFile> {
     console.log(file);
     try {

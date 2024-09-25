@@ -39,7 +39,7 @@ const PasswordChecker: FC<IPasswordCheckerProps> = ({ password = '' }) => {
             key={index}
             className={cn(
               'flex items-center justify-start gap-2 text-sm',
-              check.isValid ? 'text-green-500' : 'text-gray-500'
+              check.isValid ? 'text-green-500' : 'text-gray-500',
             )}
           >
             {!check.isValid ? <GoDotFill /> : <LuCheckCircle2 />}

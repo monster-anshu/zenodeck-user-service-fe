@@ -19,6 +19,6 @@ export const action: ActionFunction = async ({ request }) => {
 
   return json(
     { success: true },
-    { headers: { 'Set-Cookie': await themeSession.commit() } }
+    { headers: { 'Set-Cookie': await themeSession.commit() } },
   );
 };
