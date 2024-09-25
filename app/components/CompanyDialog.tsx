@@ -154,7 +154,9 @@ const CompanyDialog: FC<ICompanyDialogProps> = ({ company, onHide }) => {
                                     ) : (
                                       <div className=''>No image</div>
                                     )}
-                                    <Button onClick={open}>Upload</Button>
+                                    <Button onClick={open} type='button'>
+                                      Upload
+                                    </Button>
                                   </div>
                                 );
                               }}
