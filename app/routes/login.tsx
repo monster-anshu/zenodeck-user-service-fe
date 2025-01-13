@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { AuthApi } from '~/api/auth.api';
+import { PRODUCT_IDS, PRODUCTS } from '~/common/products';
 import { cn } from '~/lib/utils';
 import { Button } from '~/shadcn/ui/button';
 import {
@@ -31,8 +32,6 @@ import {
 } from '~/shadcn/ui/select';
 import { FormElement } from '~/types';
 
-const PRODUCT_IDS = ['BOOKINGS', 'PROJECTS'] as const;
-
 const schema = z.object({
   emailId: z.string().email({
     message: 'Invalid email',
@@ -50,6 +49,7 @@ const LoginPage = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       emailId: '',
+      productId: PRODUCT_IDS[0],
     },
   });
 
@@ -116,7 +116,7 @@ const LoginPage = () => {
                           <FormLabel>{item.label}</FormLabel>
                           <Select
                             onValueChange={field.onChange}
-                            defaultValue={field.value}
+                            value={field.value}
                           >
                             <FormControl>
                               <SelectTrigger>
@@ -193,16 +193,10 @@ const formElements: FormElement<typeof schema>[] = [
     name: 'productId',
     label: 'Product Id',
     type: 'select',
-    options: [
-      {
-        label: 'Bookings',
-        value: 'BOOKINGS',
-      },
-      {
-        label: 'Projects',
-        value: 'PROJECTS',
-      },
-    ],
+    options: PRODUCTS.map((product) => ({
+      label: product.name,
+      value: product.productId,
+    })),
   },
 ];
 

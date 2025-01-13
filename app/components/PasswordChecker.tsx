@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { GoDotFill } from 'react-icons/go';
-import { LuCheckCircle2 } from 'react-icons/lu';
+import { LuCheckCheck } from 'react-icons/lu';
 import { cn } from '~/lib/utils';
 
 type IPasswordCheckerProps = {
@@ -42,7 +42,7 @@ const PasswordChecker: FC<IPasswordCheckerProps> = ({ password = '' }) => {
               check.isValid ? 'text-green-500' : 'text-gray-500',
             )}
           >
-            {!check.isValid ? <GoDotFill /> : <LuCheckCircle2 />}
+            {!check.isValid ? <GoDotFill /> : <LuCheckCheck />}
             <span>{check.label}</span>
           </div>
         );
