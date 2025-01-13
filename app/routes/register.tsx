@@ -58,14 +58,15 @@ const RegisterPage = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       emailId: '',
-      productId: PRODUCT_IDS[0],
     },
   });
 
   const register = useMutation({
     mutationFn: AuthApi.register,
     onSuccess() {
-      navigate('/user');
+      navigate('/user', {
+        viewTransition: true,
+      });
     },
   });
 
@@ -165,7 +166,11 @@ const RegisterPage = () => {
             <div className='text-center text-sm'>
               <p>
                 <span>{'Already have an account ? '}</span>
-                <Link className='text-primary underline' to={'/login'}>
+                <Link
+                  className='text-primary underline'
+                  to={'/login'}
+                  viewTransition
+                >
                   Login
                 </Link>
               </p>

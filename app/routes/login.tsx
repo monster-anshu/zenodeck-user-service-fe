@@ -60,7 +60,9 @@ const LoginPage = () => {
   const login = useMutation({
     mutationFn: AuthApi.login,
     onSuccess() {
-      navigate('/user');
+      navigate('/user', {
+        viewTransition: true,
+      });
     },
   });
 
@@ -162,13 +164,18 @@ const LoginPage = () => {
                 <Link
                   className='text-primary underline'
                   to={'/forgot-password'}
+                  viewTransition
                 >
                   Forgot password ?
                 </Link>
               </p>
               <p>
                 <span>{"Don't have an account ? "}</span>
-                <Link className='text-primary underline' to={'/register'}>
+                <Link
+                  className='text-primary underline'
+                  to={'/register'}
+                  viewTransition
+                >
                   Register
                 </Link>
               </p>

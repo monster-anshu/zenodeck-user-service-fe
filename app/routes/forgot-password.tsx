@@ -77,7 +77,11 @@ const ForgotPassword = () => {
       {values.openOtpDialog ? (
         <OtpDialog
           emailId={values.emailId}
-          onVerified={() => navigate('/login')}
+          onVerified={() =>
+            navigate('/login', {
+              viewTransition: true,
+            })
+          }
         />
       ) : null}
       <Card className={cn('mx-auto w-[500px]')}>
@@ -132,7 +136,11 @@ const ForgotPassword = () => {
             </form>
             <div className='text-center text-sm'>
               <p>
-                <Link className='text-primary underline' to={'/login'}>
+                <Link
+                  className='text-primary underline'
+                  to={'/login'}
+                  viewTransition
+                >
                   Back to login
                 </Link>
               </p>

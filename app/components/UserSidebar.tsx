@@ -34,7 +34,9 @@ const UserSidebar: FC<IUserSidebarProps> = () => {
       label: 'Logout',
       onClick: async () => {
         await AuthApi.logout();
-        navigate('/login');
+        navigate('/login', {
+          viewTransition: true,
+        });
       },
     },
   ];
@@ -47,11 +49,16 @@ const UserSidebar: FC<IUserSidebarProps> = () => {
           <Link
             to={option.link}
             key={option.link}
-            onClick={option.onClick}
+            onClick={(e) => {
+              if (!option.onClick) return;
+              e.preventDefault();
+              option.onClick();
+            }}
             className={cn(
               'flex items-center justify-start gap-2 border-b-2 px-4 py-3 font-medium',
               isActive ? 'text-primary' : '',
             )}
+            viewTransition
           >
             <span className='text-lg'>{option.icon}</span>
             <span>{option.label}</span>
