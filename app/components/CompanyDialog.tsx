@@ -1,7 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { produce } from 'immer';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { CompanyApi, UserCompany } from '~/api/company.api';
+import FileUploadApi from '~/api/file-upload.api';
+import { companyListOptions } from '~/hooks/user';
+import { Button } from '~/shadcn/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -19,12 +25,6 @@ import {
 import { Input } from '~/shadcn/ui/input';
 import { FormElement } from '~/types';
 import Upload from './fileUpload/Upload';
-import FileUploadApi from '~/api/file-upload.api';
-import { Button } from '~/shadcn/ui/button';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CompanyApi, UserCompany } from '~/api/company.api';
-import { produce } from 'immer';
-import { companyListOptions } from '~/hooks/user';
 
 type ICompanyDialogProps = {
   company: UserCompany;

@@ -1,5 +1,5 @@
-import { ApiResponse, client } from './client';
 import axios from 'axios';
+import { ApiResponse, client } from './client';
 
 export default class FileUploadApi {
   static async upload(

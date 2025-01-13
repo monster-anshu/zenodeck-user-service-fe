@@ -1,6 +1,6 @@
 import { useFetcher } from '@remix-run/react';
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 
 enum Theme {
   DARK = 'dark',
@@ -134,4 +134,4 @@ function isTheme(value: unknown): value is Theme {
   return typeof value === 'string' && themes.includes(value as Theme);
 }
 
-export { Theme, ThemeProvider, useTheme, NonFlashOfWrongThemeEls, isTheme };
+export { isTheme, NonFlashOfWrongThemeEls, Theme, ThemeProvider, useTheme };

@@ -3,7 +3,10 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { AuthApi } from '~/api/auth.api';
 import OtpDialog from '~/components/OtpDialog';
+import PasswordChecker from '~/components/PasswordChecker';
+import { userOptions } from '~/hooks/user';
 import { Button } from '~/shadcn/ui/button';
 import {
   Form,
@@ -15,9 +18,6 @@ import {
 } from '~/shadcn/ui/form';
 import { Input } from '~/shadcn/ui/input';
 import { FormElement } from '~/types';
-import { userOptions } from '~/hooks/user';
-import PasswordChecker from '~/components/PasswordChecker';
-import { AuthApi } from '~/api/auth.api';
 
 type IPasswordPageProps = {};
 

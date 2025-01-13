@@ -1,9 +1,9 @@
 import React, { useImperativeHandle, useRef, useState } from 'react';
-import { checkAudioVideo, getImageDimensions } from './utils';
-import { toast } from 'sonner';
-import { IFile } from '~/api/file-upload.api';
 import { createPortal } from 'react-dom';
 import { PiSpinnerGapLight } from 'react-icons/pi';
+import { toast } from 'sonner';
+import { IFile } from '~/api/file-upload.api';
+import { checkAudioVideo, getImageDimensions } from './utils';
 
 export function formatFileSize(fileSizeInBytes: number): string {
   if (fileSizeInBytes === 0) {

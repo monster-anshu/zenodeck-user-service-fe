@@ -1,3 +1,4 @@
+import { LoaderFunctionArgs } from '@remix-run/node';
 import {
   Links,
   Meta,
@@ -6,17 +7,16 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import './tailwind.css';
-import ReactQueryProvider from './providers/react-query';
 import { Toaster } from 'sonner';
+import { cn } from './lib/utils';
+import ReactQueryProvider from './providers/react-query';
 import {
   NonFlashOfWrongThemeEls,
   ThemeProvider,
   useTheme,
 } from './providers/theme';
-import { cn } from './lib/utils';
+import './tailwind.css';
 import { getThemeSession } from './utils/theme.server';
-import { LoaderFunctionArgs } from '@remix-run/node';
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const themeSession = await getThemeSession(request);

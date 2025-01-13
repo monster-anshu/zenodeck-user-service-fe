@@ -1,10 +1,10 @@
-import { FC } from 'react';
-import { CiUser } from 'react-icons/ci';
-import { BsKey, BsPower } from 'react-icons/bs';
-import { SiAwsorganizations } from 'react-icons/si';
 import { Link, useLocation, useNavigate } from '@remix-run/react';
-import { cn } from '~/lib/utils';
+import { FC } from 'react';
+import { BsKey, BsPower } from 'react-icons/bs';
+import { CiUser } from 'react-icons/ci';
+import { SiAwsorganizations } from 'react-icons/si';
 import { AuthApi } from '~/api/auth.api';
+import { cn } from '~/lib/utils';
 
 type IUserSidebarProps = {};
 

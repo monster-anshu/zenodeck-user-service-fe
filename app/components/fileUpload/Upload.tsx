@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import FileUpload, { IFileUploadProps, IFileUploadRef } from './FileUpload';
 import React, { FC, useRef, useState } from 'react';
 import { IFile } from '~/api/file-upload.api';
 import { cn } from '~/lib/utils';
+import FileUpload, { IFileUploadProps, IFileUploadRef } from './FileUpload';
 
 export interface IUploadProps extends IFileUploadProps {
   children?: (value: IUploadChildrenOption) => React.ReactNode;
