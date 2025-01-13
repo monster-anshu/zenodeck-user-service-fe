@@ -29,7 +29,7 @@ const UserSidebar: FC<IUserSidebarProps> = () => {
       label: 'Company',
     },
     {
-      link: '#',
+      link: '/api/v1/user/auth/logout',
       icon: <BsPower />,
       label: 'Logout',
       onClick: async () => {

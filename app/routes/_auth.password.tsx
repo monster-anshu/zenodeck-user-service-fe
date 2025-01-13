@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { MetaFunction } from '@remix-run/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
@@ -26,6 +27,10 @@ const schema = z.object({
   confirmPassword: z.string(),
   openOtpDialog: z.boolean(),
 });
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Password' }];
+};
 
 const PasswordPage: FC<IPasswordPageProps> = () => {
   const { data: user } = useQuery(userOptions);

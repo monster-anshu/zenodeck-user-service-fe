@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, useNavigate } from '@remix-run/react';
+import { Link, MetaFunction, useNavigate } from '@remix-run/react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -31,6 +31,10 @@ import {
   SelectValue,
 } from '~/shadcn/ui/select';
 import { FormElement } from '~/types';
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Login' }];
+};
 
 const schema = z.object({
   emailId: z.string().email({

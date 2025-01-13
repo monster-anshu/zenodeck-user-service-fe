@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, useNavigate } from '@remix-run/react';
+import { Link, MetaFunction, useNavigate } from '@remix-run/react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -25,6 +25,10 @@ import {
 } from '~/shadcn/ui/form';
 import { Input } from '~/shadcn/ui/input';
 import { FormElement } from '~/types';
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Forgot Password' }];
+};
 
 const schema = z.object({
   emailId: z

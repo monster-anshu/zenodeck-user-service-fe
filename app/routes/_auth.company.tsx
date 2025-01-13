@@ -1,3 +1,4 @@
+import { MetaFunction } from '@remix-run/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { PiSpinnerGapLight } from 'react-icons/pi';
@@ -8,6 +9,10 @@ import { companyListOptions } from '~/hooks/user';
 import { Button } from '~/shadcn/ui/button';
 
 type ICompanyProps = {};
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Company' }];
+};
 
 const Company: FC<ICompanyProps> = () => {
   const { data, isLoading } = useQuery(companyListOptions);
