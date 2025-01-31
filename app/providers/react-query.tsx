@@ -16,11 +16,31 @@ const queryClient = new QueryClient({
   },
 });
 
+const ReactQueryDevtoolsProduction = React.lazy(() =>
+  import('@tanstack/react-query-devtools/build/modern/production.js').then(
+    (d) => ({
+      default: d.ReactQueryDevtools,
+    }),
+  ),
+);
+
 const ReactQueryProvider: FC<IReactQueryProviderProps> = ({ children }) => {
+  const [showDevtools, setShowDevtools] = React.useState(false);
+
+  React.useEffect(() => {
+    // @ts-expect-error Ignore
+    window.toggleDevtools = () => setShowDevtools((old) => !old);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {children}
       <ReactQueryDevtools initialIsOpen={false} />
+      {showDevtools && (
+        <React.Suspense fallback={null}>
+          <ReactQueryDevtoolsProduction />
+        </React.Suspense>
+      )}
     </QueryClientProvider>
   );
 };

@@ -74,7 +74,7 @@ const RegisterPage = () => {
       const redirect = searchParams.get('redirect');
 
       if (redirect) {
-        const url = new URL(redirect);
+        const url = new URL(decodeURIComponent(redirect));
         window.location.href = url.toString();
         return;
       }
