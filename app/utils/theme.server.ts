@@ -8,7 +8,6 @@ const themeStorage = createCookieSessionStorage({
     sameSite: 'lax',
     path: '/',
     httpOnly: true,
-    domain: process.env.BASE_DOMAIN,
   },
 });
 

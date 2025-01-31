@@ -1,10 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, MetaFunction, useNavigate } from '@remix-run/react';
+import {
+  Link,
+  MetaFunction,
+  useNavigate,
+  useSearchParams,
+} from '@remix-run/react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { AuthApi } from '~/api/auth.api';
-import { PRODUCT_IDS, PRODUCTS } from '~/common/products';
+import { PRODUCT_IDS, PRODUCTS, PRODUCTS_URL } from '~/common/products';
 import { cn } from '~/lib/utils';
 import { Button } from '~/shadcn/ui/button';
 import {
@@ -48,6 +53,7 @@ const schema = z.object({
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -60,6 +66,20 @@ const LoginPage = () => {
   const login = useMutation({
     mutationFn: AuthApi.login,
     onSuccess() {
+      const productId = searchParams.get('productId');
+      const redirect = searchParams.get('redirect');
+
+      if (redirect) {
+        const url = new URL(redirect);
+        window.location.href = url.toString();
+        return;
+      }
+
+      if (productId && productId in PRODUCTS_URL) {
+        window.location.href = PRODUCTS_URL[productId as never];
+        return;
+      }
+
       navigate('/user', {
         viewTransition: true,
       });

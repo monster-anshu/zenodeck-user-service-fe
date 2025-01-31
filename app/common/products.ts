@@ -1,3 +1,5 @@
+import { CAMPAIGN_URL } from '~/env';
+
 export const PRODUCTS = [
   {
     name: 'Campaign',
@@ -18,3 +20,7 @@ export const PRODUCT_IDS = [
   'CAMPAIGN',
   // 'BOOKINGS', 'BOOKINGS'
 ] as const;
+
+export const PRODUCTS_URL = {
+  CAMPAIGN: CAMPAIGN_URL,
+};
