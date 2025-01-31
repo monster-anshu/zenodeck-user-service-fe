@@ -1,14 +1,14 @@
 import { Outlet } from '@remix-run/react';
 import { useQuery } from '@tanstack/react-query';
-import { PiSpinnerGapLight } from 'react-icons/pi';
 import UserSidebar from '~/components/UserSidebar';
 import { userOptions } from '~/hooks/user';
+import Spinner from '~/shadcn/ui/spinner';
 
 const Auth = () => {
   const userQuery = useQuery(userOptions);
 
   if (userQuery.isLoading) {
-    return <PiSpinnerGapLight className='mx-auto my-5 animate-spin text-3xl' />;
+    return <Spinner className='my-4' />;
   }
 
   return (

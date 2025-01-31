@@ -1,12 +1,12 @@
 import { MetaFunction } from '@remix-run/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { PiSpinnerGapLight } from 'react-icons/pi';
 import { UserCompany } from '~/api/company.api';
 import CompanyDialog from '~/components/CompanyDialog';
 import ProfilePic from '~/components/ProfilePic';
 import { companyListOptions } from '~/hooks/user';
 import { Button } from '~/shadcn/ui/button';
+import Spinner from '~/shadcn/ui/spinner';
 
 type ICompanyProps = {};
 
@@ -21,7 +21,7 @@ const Company: FC<ICompanyProps> = () => {
   );
 
   if (isLoading) {
-    return <PiSpinnerGapLight className='mx-auto my-5 animate-spin text-3xl' />;
+    return <Spinner className='my-4' />;
   }
 
   return (

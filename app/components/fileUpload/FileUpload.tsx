@@ -1,8 +1,8 @@
 import React, { useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { PiSpinnerGapLight } from 'react-icons/pi';
 import { toast } from 'sonner';
 import { IFile } from '~/api/file-upload.api';
+import Spinner from '~/shadcn/ui/spinner';
 import { checkAudioVideo, getImageDimensions } from './utils';
 
 export function formatFileSize(fileSizeInBytes: number): string {
@@ -162,7 +162,7 @@ const FileUpload = React.forwardRef<IFileUploadRef, IFileUploadProps>(
           loading.isVisible &&
           createPortal(
             <div className='fixed bottom-0 left-0 right-0 top-0 z-[100] grid place-items-center bg-black/40'>
-              <PiSpinnerGapLight className='mx-auto my-5 animate-spin text-3xl' />
+              <Spinner className='mx-auto my-5' />
             </div>,
             document.body,
           )}
