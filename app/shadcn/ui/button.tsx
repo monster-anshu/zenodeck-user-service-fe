@@ -3,6 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
 import { cn } from '~/lib/utils';
+import Spinner from './spinner';
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
@@ -42,7 +43,10 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, loading, ...props }, ref) => {
+  (
+    { className, variant, size, asChild = false, loading, children, ...props },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : 'button';
     return (
       <Comp
@@ -50,7 +54,20 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={loading || props.disabled}
         {...props}
-      />
+      >
+        {loading ? (
+          <>
+            <span className='relative block h-full w-full'>
+              <span className='absolute left-0 right-0 top-1/2 -translate-y-1/2'>
+                <Spinner />
+              </span>
+              <span className='invisible'>{children}</span>
+            </span>
+          </>
+        ) : (
+          children
+        )}
+      </Comp>
     );
   },
 );

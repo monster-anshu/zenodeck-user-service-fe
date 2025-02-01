@@ -1,13 +1,16 @@
 import React, { FC } from 'react';
 import { CgSpinner } from 'react-icons/cg';
-import { twMerge } from 'tailwind-merge';
+import { cn } from '~/lib/utils';
 
 export type ISpinnerProps = React.ComponentProps<typeof CgSpinner>;
 
 const Spinner: FC<ISpinnerProps> = ({ className, ...props }) => (
   <CgSpinner
     {...props}
-    className={twMerge('text-p1 mx-auto animate-spin text-2xl', className)}
+    className={cn(
+      'mx-auto animate-spin text-2xl text-primary-foreground',
+      className,
+    )}
   />
 );
 
