@@ -7,9 +7,15 @@ import {
 } from '@remix-run/react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 import { AuthApi } from '~/api/auth.api';
-import { PRODUCT_IDS, PRODUCTS, PRODUCTS_URL } from '~/common/products';
+import {
+  PRODUCT_ID,
+  PRODUCT_IDS,
+  PRODUCTS,
+  PRODUCTS_URL,
+} from '~/common/products';
 import { cn } from '~/lib/utils';
 import { Button } from '~/shadcn/ui/button';
 import {
@@ -54,19 +60,21 @@ const schema = z.object({
 const LoginPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const productIdParam = searchParams.get('productId');
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
       emailId: '',
-      productId: PRODUCT_IDS[0],
+      productId: PRODUCT_IDS.includes(productIdParam as never)
+        ? (productIdParam as PRODUCT_ID)
+        : PRODUCT_IDS[0],
     },
   });
 
   const login = useMutation({
     mutationFn: AuthApi.login,
-    onSuccess() {
-      const productId = searchParams.get('productId');
+    onSuccess(_, { productId }) {
       const redirect = searchParams.get('redirect');
 
       if (redirect) {
@@ -75,14 +83,17 @@ const LoginPage = () => {
         return;
       }
 
-      if (productId && productId in PRODUCTS_URL) {
-        window.location.href = PRODUCTS_URL[productId as never];
+      if (productId) {
+        window.location.href = PRODUCTS_URL[productId];
         return;
       }
 
       navigate('/user', {
         viewTransition: true,
       });
+    },
+    onError(error) {
+      toast.error(error.message);
     },
   });
 

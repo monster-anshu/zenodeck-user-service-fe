@@ -7,6 +7,7 @@ import {
 } from '@remix-run/react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 import { AuthApi } from '~/api/auth.api';
 import { PRODUCT_IDS, PRODUCTS, PRODUCTS_URL } from '~/common/products';
@@ -69,8 +70,7 @@ const RegisterPage = () => {
 
   const register = useMutation({
     mutationFn: AuthApi.register,
-    onSuccess() {
-      const productId = searchParams.get('productId');
+    onSuccess(_, { productId }) {
       const redirect = searchParams.get('redirect');
 
       if (redirect) {
@@ -79,14 +79,17 @@ const RegisterPage = () => {
         return;
       }
 
-      if (productId && productId in PRODUCTS_URL) {
-        window.location.href = PRODUCTS_URL[productId as never];
+      if (productId) {
+        window.location.href = PRODUCTS_URL[productId];
         return;
       }
 
       navigate('/user', {
         viewTransition: true,
       });
+    },
+    onError(error) {
+      toast.error(error.message);
     },
   });
 

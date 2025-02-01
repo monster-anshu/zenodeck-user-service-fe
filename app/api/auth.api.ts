@@ -1,3 +1,4 @@
+import { PRODUCT_ID } from '~/common/products';
 import { ApiResponse, client } from './client';
 
 export class AuthApi {
@@ -45,8 +46,8 @@ export type RegisterBody = {
   lastName: string;
   mobileNo: string;
   password: string;
-  productId?: string;
   companyName?: string;
+  productId?: PRODUCT_ID;
 };
 
 export type ForgotPassword = {
@@ -59,6 +60,7 @@ type RegisterResponse = ApiResponse;
 export type LoginBody = {
   emailId: string;
   password: string;
+  productId?: PRODUCT_ID;
 };
 
 type LoginResponse = ApiResponse & {
