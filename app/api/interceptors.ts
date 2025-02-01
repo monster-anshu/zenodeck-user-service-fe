@@ -1,4 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
+import { redirectWindow } from '~/utils/url';
 import { ApiResponse } from './client';
 
 export class ApiError extends Error {
@@ -23,17 +24,23 @@ export const commonResponseInterceptor = (response: AxiosResponse) => {
   throw new ApiError(message, data);
 };
 
-export const commonErrorAuthInterceptor = (error: AxiosError) => {
+export const commonErrorAuthInterceptor = async (error: AxiosError) => {
   const status = error.response?.status;
-  const redirect = error.response?.headers['x-orufy-redirect'];
+  const redirect = error.response?.headers['x-zenodeck-redirect'];
+  const data = error.response?.data as ApiResponse;
+
+  let message = 'Something went wrong';
+  message = data?.error || error.message || message;
+
   if (redirect) {
-    window.location.href = redirect;
+    await redirectWindow(redirect);
     return;
   }
 
   if (status === 401) {
-    window.location.href = '/login';
+    await redirectWindow('/login');
+    return;
   }
 
-  throw new Error(error.message);
+  throw new ApiError(message, data);
 };
