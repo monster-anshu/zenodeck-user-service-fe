@@ -10,7 +10,12 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { AuthApi } from '~/api/auth.api';
-import { PRODUCT_IDS, PRODUCTS, PRODUCTS_URL } from '~/common/products';
+import {
+  PRODUCT_ID,
+  PRODUCT_IDS,
+  PRODUCTS,
+  PRODUCTS_URL,
+} from '~/common/products';
 import { cn } from '~/lib/utils';
 import { Button } from '~/shadcn/ui/button';
 import {
@@ -59,12 +64,17 @@ const schema = z.object({
 
 const RegisterPage = () => {
   const [searchParams] = useSearchParams();
+  const productIdParam = searchParams.get('productId');
+
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
       emailId: '',
+      productId: PRODUCT_IDS.includes(productIdParam as never)
+        ? (productIdParam as PRODUCT_ID)
+        : undefined,
     },
   });
 
