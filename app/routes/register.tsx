@@ -42,6 +42,7 @@ import {
   SelectValue,
 } from '~/shadcn/ui/select';
 import { FormElement } from '~/types';
+import { createURLObject, redirectWindow } from '~/utils/url';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Register' }];
@@ -85,17 +86,16 @@ const RegisterPage = () => {
 
   const register = useMutation({
     mutationFn: AuthApi.register,
-    onSuccess(_, { productId }) {
-      const redirect = searchParams.get('redirect');
+    async onSuccess(_, { productId }) {
+      const redirect = createURLObject(searchParams.get('redirect'));
 
       if (redirect) {
-        const url = new URL(decodeURIComponent(redirect));
-        window.location.href = url.toString();
+        await redirectWindow(redirect, true);
         return;
       }
 
       if (productId) {
-        window.location.href = PRODUCTS_URL[productId];
+        await redirectWindow(PRODUCTS_URL[productId], true);
         return;
       }
 
