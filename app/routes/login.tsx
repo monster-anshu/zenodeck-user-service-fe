@@ -66,6 +66,7 @@ const LoginPage = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       emailId: '',
+      password: '',
       productId: PRODUCT_IDS.includes(productIdParam as never)
         ? (productIdParam as PRODUCT_ID)
         : PRODUCT_IDS[0],

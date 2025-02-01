@@ -72,6 +72,11 @@ const RegisterPage = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       emailId: '',
+      companyName: '',
+      firstName: '',
+      lastName: '',
+      mobileNo: '',
+      password: '',
       productId: PRODUCT_IDS.includes(productIdParam as never)
         ? (productIdParam as PRODUCT_ID)
         : undefined,
