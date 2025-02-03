@@ -72,7 +72,9 @@ const RegisterPage = () => {
   const register = useMutation({
     mutationFn: AuthApi.register,
     async onSuccess(_, { productId }) {
-      const redirect = createURLObject(searchParams.get('redirect'));
+      const redirect = createURLObject(
+        decodeURIComponent(searchParams.get('redirect') || ''),
+      );
 
       if (redirect) {
         await redirectWindow(redirect, true);

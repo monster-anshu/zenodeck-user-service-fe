@@ -62,7 +62,9 @@ const LoginPage = () => {
   const login = useMutation({
     mutationFn: AuthApi.login,
     async onSuccess(_, { productId }) {
-      const redirect = createURLObject(searchParams.get('redirect'));
+      const redirect = createURLObject(
+        decodeURIComponent(searchParams.get('redirect') || ''),
+      );
 
       if (redirect) {
         await redirectWindow(redirect, true);
