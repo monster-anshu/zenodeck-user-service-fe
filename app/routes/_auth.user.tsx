@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { UserApi } from '~/api/user.api';
 import ProfilePic from '~/components/ProfilePic';
 import { userOptions } from '~/hooks/user';
+import { FormElement } from '~/shadcn/molecules/form-component';
 import { Button } from '~/shadcn/ui/button';
 import {
   Form,
@@ -16,7 +17,6 @@ import {
   FormMessage,
 } from '~/shadcn/ui/form';
 import { Input } from '~/shadcn/ui/input';
-import { FormElement } from '~/types';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'User Profile' }];

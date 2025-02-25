@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { CompanyApi, UserCompany } from '~/api/company.api';
 import FileUploadApi from '~/api/file-upload.api';
 import { companyListOptions } from '~/hooks/user';
+import { FormElement } from '~/shadcn/molecules/form-component';
 import { Button } from '~/shadcn/ui/button';
 import {
   Dialog,
@@ -23,7 +24,6 @@ import {
   FormMessage,
 } from '~/shadcn/ui/form';
 import { Input } from '~/shadcn/ui/input';
-import { FormElement } from '~/types';
 import Upload from './fileUpload/Upload';
 
 type ICompanyDialogProps = {

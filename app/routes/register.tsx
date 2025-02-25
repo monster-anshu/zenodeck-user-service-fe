@@ -6,6 +6,7 @@ import {
   useSearchParams,
 } from '@remix-run/react';
 import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -16,6 +17,7 @@ import {
   PRODUCTS,
   PRODUCTS_URL,
 } from '~/common/products';
+import OtpDialog from '~/components/OtpDialog';
 import { cn } from '~/lib/utils';
 import { FormComponent, FormElement } from '~/shadcn/molecules/form-component';
 import { Button } from '~/shadcn/ui/button';
@@ -51,6 +53,7 @@ const schema = z.object({
 const RegisterPage = () => {
   const [searchParams] = useSearchParams();
   const productIdParam = searchParams.get('productId');
+  const [openOtpDialog, setOpenOtpDialog] = useState(false);
 
   const navigate = useNavigate();
 
@@ -69,26 +72,34 @@ const RegisterPage = () => {
     },
   });
 
+  const values = form.watch();
+
+  const onOtpVerified = async () => {
+    const productId = values.productId;
+
+    const redirect = createURLObject(
+      decodeURIComponent(searchParams.get('redirect') || ''),
+    );
+
+    if (redirect) {
+      await redirectWindow(redirect, true);
+      return;
+    }
+
+    if (productId) {
+      await redirectWindow(PRODUCTS_URL[productId], true);
+      return;
+    }
+
+    navigate('/user', {
+      viewTransition: true,
+    });
+  };
+
   const register = useMutation({
     mutationFn: AuthApi.register,
-    async onSuccess(_, { productId }) {
-      const redirect = createURLObject(
-        decodeURIComponent(searchParams.get('redirect') || ''),
-      );
-
-      if (redirect) {
-        await redirectWindow(redirect, true);
-        return;
-      }
-
-      if (productId) {
-        await redirectWindow(PRODUCTS_URL[productId], true);
-        return;
-      }
-
-      navigate('/user', {
-        viewTransition: true,
-      });
+    async onSuccess() {
+      setOpenOtpDialog(true);
     },
     onError(error) {
       toast.error(error.message);
@@ -101,6 +112,9 @@ const RegisterPage = () => {
 
   return (
     <div className='flex min-h-screen items-center p-4'>
+      {openOtpDialog ? (
+        <OtpDialog emailId={values.emailId} onVerified={onOtpVerified} />
+      ) : null}
       <Card className={cn('mx-auto w-[500px]')}>
         <CardHeader>
           <CardTitle>Register</CardTitle>

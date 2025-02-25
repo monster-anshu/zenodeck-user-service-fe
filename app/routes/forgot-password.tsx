@@ -7,6 +7,7 @@ import { AuthApi } from '~/api/auth.api';
 import OtpDialog from '~/components/OtpDialog';
 import PasswordChecker from '~/components/PasswordChecker';
 import { cn } from '~/lib/utils';
+import { FormElement } from '~/shadcn/molecules/form-component';
 import { Button } from '~/shadcn/ui/button';
 import {
   Card,
@@ -24,7 +25,6 @@ import {
   FormMessage,
 } from '~/shadcn/ui/form';
 import { Input } from '~/shadcn/ui/input';
-import { FormElement } from '~/types';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Forgot Password' }];

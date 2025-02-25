@@ -8,6 +8,7 @@ import { AuthApi } from '~/api/auth.api';
 import OtpDialog from '~/components/OtpDialog';
 import PasswordChecker from '~/components/PasswordChecker';
 import { userOptions } from '~/hooks/user';
+import { FormElement } from '~/shadcn/molecules/form-component';
 import { Button } from '~/shadcn/ui/button';
 import {
   Form,
@@ -18,7 +19,6 @@ import {
   FormMessage,
 } from '~/shadcn/ui/form';
 import { Input } from '~/shadcn/ui/input';
-import { FormElement } from '~/types';
 
 type IPasswordPageProps = {};
 
