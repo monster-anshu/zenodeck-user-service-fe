@@ -2,7 +2,9 @@ import { MetaFunction } from '@remix-run/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { UserCompany } from '~/api/company.api';
+import { PRODUCTS } from '~/common/products';
 import CompanyDialog from '~/components/CompanyDialog';
+import ProductChip from '~/components/ProductChip';
 import ProfilePic from '~/components/ProfilePic';
 import { companyListOptions } from '~/hooks/user';
 import { Button } from '~/shadcn/ui/button';
@@ -46,9 +48,20 @@ const Company: FC<ICompanyProps> = () => {
               <div className='flex-1 p-4'>
                 <p className='text-sm font-medium'>{company.companyName}</p>
                 <p className='mt-1 text-xs text-foreground/70'>
-                  Registered with
+                  Product Access
                 </p>
-                <p className='text-sm'>{company.allowedProductIds.join(' ')}</p>
+                <div className='mt-2 text-sm'>
+                  {PRODUCTS.map((product) => (
+                    <ProductChip
+                      added={company.allowedProductIds.includes(
+                        product.productId,
+                      )}
+                      companyId={company._id}
+                      id={product.productId}
+                      label={product.name}
+                    />
+                  ))}
+                </div>
               </div>
               <div className='p-3'>
                 <Button onClick={() => setSelectedCompany(company)}>

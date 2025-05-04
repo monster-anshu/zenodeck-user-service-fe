@@ -14,6 +14,14 @@ export class CompanyApi {
     );
     return data.companyInfo;
   }
+
+  static async addProduct({ companyId, productId }: AddProductBody) {
+    const { data } = await client.post(
+      `/user/company/${companyId}/create-product`,
+      { productId },
+    );
+    return data;
+  }
 }
 
 type CompanyInfo = {
@@ -28,6 +36,11 @@ type UpdateCompanyBody = {
   companyId: string;
   companyName: string;
   companyLogo?: string | null;
+};
+
+type AddProductBody = {
+  companyId: string;
+  productId: string;
 };
 
 type UpdateCompanyResponse = ApiResponse & {
