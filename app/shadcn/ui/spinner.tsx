@@ -1,16 +1,13 @@
+import { LoaderCircle } from 'lucide-react';
 import React, { FC } from 'react';
-import { CgSpinner } from 'react-icons/cg';
-import { cn } from '~/lib/utils';
+import { twMerge } from 'tailwind-merge';
 
-export type ISpinnerProps = React.ComponentProps<typeof CgSpinner>;
+export type ISpinnerProps = React.ComponentProps<typeof LoaderCircle>;
 
 const Spinner: FC<ISpinnerProps> = ({ className, ...props }) => (
-  <CgSpinner
+  <LoaderCircle
     {...props}
-    className={cn(
-      'mx-auto animate-spin text-2xl text-primary-foreground',
-      className,
-    )}
+    className={twMerge('mx-auto animate-spin text-2xl text-primary', className)}
   />
 );
 

@@ -59,7 +59,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <>
             <span className='relative block h-full w-full'>
               <span className='absolute left-0 right-0 top-1/2 -translate-y-1/2'>
-                <Spinner />
+                <Spinner className='text-primary-foreground' />
               </span>
               <span className='invisible'>{children}</span>
             </span>
